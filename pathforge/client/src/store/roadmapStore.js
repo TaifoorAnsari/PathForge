@@ -174,9 +174,13 @@ export const useRoadmapStore = create((set, get) => ({
             }
           } catch (pollErr) {
             clearInterval(pollInterval);
+            const errorMsg =
+              pollErr.response?.data?.error?.message ||
+              pollErr.response?.data?.message ||
+              'Generation was interrupted. Please try again.';
             set({
               isGenerating: false,
-              error: pollErr.response?.data?.message || 'Failed checking generation status.',
+              error: errorMsg,
             });
           }
         }, 800);

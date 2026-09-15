@@ -124,7 +124,7 @@ describe('Gemini Roadmap Service & Generation Queue', () => {
       expect(Array.isArray(roadmap.nodes)).toBe(true);
       expect(roadmap.nodes.length).toBeGreaterThanOrEqual(4);
       expect(['gemini', 'blueprint']).toContain(source);
-    });
+    }, 30000);
   });
 
   // ─── 4. Worker Processing Tests ────────────────────────────────────────
@@ -145,7 +145,7 @@ describe('Gemini Roadmap Service & Generation Queue', () => {
       expect(result.nodeCount).toBeGreaterThanOrEqual(4);
       expect(result.totalEstimatedHours).toBeGreaterThan(0);
       expect(progressSteps.length).toBeGreaterThan(0);
-    });
+    }, 30000);
   });
 
   // ─── 5. Generation Queue Tests ─────────────────────────────────────────

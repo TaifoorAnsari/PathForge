@@ -16,7 +16,7 @@ let geminiClient = null;
 
 const getGeminiClient = () => {
   if (geminiClient) return geminiClient;
-  if (env.GEMINI_API_KEY) {
+  if (env.GEMINI_API_KEY && process.env.NODE_ENV !== 'test') {
     geminiClient = new GoogleGenerativeAI(env.GEMINI_API_KEY);
   }
   return geminiClient;

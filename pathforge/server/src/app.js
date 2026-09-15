@@ -76,8 +76,8 @@ app.use(
 app.use(hpp());
 
 // ─── 4. Body Parsing ───────────────────────────────────────────────────
-app.use(express.json({ limit: '10kb' })); // Prevent large payload attacks
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(express.json({ limit: '10mb' })); // Prevent large payload attacks
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // ─── 5. Cookie Parser ─────────────────────────────────────────────────
 app.use(cookieParser());

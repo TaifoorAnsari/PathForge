@@ -35,7 +35,7 @@ const envSchema = z.object({
 
   // Gemini AI
   GEMINI_API_KEY: z.string().default(''),
-  GEMINI_MODEL: z.string().default('gemini-2.0-flash'),
+  GEMINI_MODEL: z.string().default('gemini-3.6-flash'),
 
   // Cluster matching
   CLUSTER_MATCH_THRESHOLD: z.coerce.number().min(0).max(1).default(0.82),

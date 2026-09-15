@@ -27,6 +27,9 @@ const VALID_DOMAIN_ROOTS = new Set([
   'data structures', 'algorithms', 'dsa', 'operating systems', 'computer networks',
   'networking', 'compilers', 'computer science', 'discrete math', 'linear algebra',
   'calculus', 'statistics', 'probability', 'boolean algebra', 'cryptography',
+  'number theory', 'combinatorics', 'differential equations', 'numerical analysis',
+  'mathematical logic', 'abstract algebra', 'real analysis', 'complex analysis',
+  'graph theory', 'topology', 'geometry', 'algebra', 'mathematics',
 
   // Artificial Intelligence & Data Science
   'machine learning', 'deep learning', 'ai', 'artificial intelligence', 'data science',
@@ -35,24 +38,57 @@ const VALID_DOMAIN_ROOTS = new Set([
   'large language models', 'llm', 'generative ai', 'prompt engineering', 'data engineering',
   'hadoop', 'spark', 'kafka', 'etl', 'tableau', 'power bi', 'business intelligence',
 
-  // Other Engineering & Sciences
+  // Engineering & Physical Sciences
   'robotics', 'ros', 'ros2', 'embedded systems', 'iot', 'internet of things', 'electronics',
-  'electrical engineering', 'mechanical engineering', 'physics', 'chemistry', 'biology',
-  'bioinformatics', 'genetics', 'neuroscience', 'quantum computing',
+  'electrical engineering', 'mechanical engineering', 'civil engineering', 'chemical engineering',
+  'physics', 'chemistry', 'quantum computing', 'quantum mechanics', 'thermodynamics',
+  'optics', 'electromagnetism', 'mechanics', 'circuits', 'signals', 'dsp', 'embedded',
 
-  // Business, Product & Design
+  // Natural & Medical Sciences
+  'biology', 'cell biology', 'molecular biology', 'microbiology', 'biochemistry',
+  'organic chemistry', 'inorganic chemistry', 'anatomy', 'physiology',
+  'neuroscience', 'neurology', 'brain', 'human brain', 'genetics', 'genomics',
+  'biotechnology', 'bioinformatics', 'pharmacology', 'pathology', 'immunology',
+  'epidemiology', 'ecology', 'evolution', 'zoology', 'botany', 'medicine',
+  'biomedical', 'clinical', 'nursing', 'dentistry', 'veterinary',
+  'astronomy', 'astrophysics', 'environmental science', 'earth science',
+  'geology', 'oceanography', 'meteorology', 'paleontology',
+
+  // Business, Finance & Economics
+  'finance', 'accounting', 'economics', 'microeconomics', 'macroeconomics',
+  'entrepreneurship', 'marketing', 'digital marketing', 'seo', 'copywriting',
+  'product management', 'project management', 'agile', 'scrum',
+  'stock market', 'investing', 'trading', 'supply chain', 'human resources',
+  'management', 'business', 'real estate', 'taxation', 'banking', 'consulting',
+  'business administration', 'operations management', 'logistics',
+
+  // Humanities, Social Sciences & Law
+  'history', 'world history', 'philosophy', 'psychology', 'sociology', 'linguistics',
+  'literature', 'political science', 'anthropology', 'geography',
+  'international relations', 'public policy', 'criminology', 'education', 'pedagogy',
+  'law', 'jurisprudence', 'theology', 'ethics', 'cultural studies',
+  'gender studies', 'archaeology',
+
+  // Arts, Music & Creative Skills
   'ui', 'ux', 'ui/ux', 'user experience', 'user interface', 'figma', 'product design',
-  'product management', 'project management', 'agile', 'scrum', 'marketing', 'digital marketing',
-  'seo', 'copywriting', 'finance', 'accounting', 'economics', 'entrepreneurship',
-  'graphic design', 'animation', 'video editing', 'blender', '3d modeling', 'game development',
-  'unity', 'unreal engine', 'music production', 'photography',
+  'graphic design', 'animation', 'video editing', 'blender', '3d modeling',
+  'game development', 'unity', 'unreal engine', 'music production', 'photography',
+  'music', 'music theory', 'guitar', 'piano', 'singing', 'violin', 'drums',
+  'drawing', 'painting', 'sculpture', 'illustration', 'calligraphy',
+  'creative writing', 'film', 'filmmaking', 'acting', 'dance', 'pottery',
+  'ceramics', 'woodworking', 'knitting', 'jewelry',
 
-  // Humanities, Social Sciences, Law & Medicine
-  'history', 'philosophy', 'psychology', 'sociology', 'linguistics', 'literature',
-  'economics', 'microeconomics', 'macroeconomics', 'law', 'jurisprudence', 'medicine',
-  'anatomy', 'physiology', 'genetics', 'biotechnology', 'astronomy', 'astrophysics',
-  'statistics', 'algebra', 'geometry', 'calculus', 'topology', 'mechanics',
-  'thermodynamics', 'circuits', 'signals', 'dsp', 'embedded',
+  // Languages
+  'english', 'spanish', 'french', 'german', 'mandarin', 'chinese', 'japanese',
+  'korean', 'arabic', 'hindi', 'portuguese', 'italian', 'russian', 'turkish',
+  'sign language', 'latin', 'greek', 'sanskrit',
+
+  // Practical & Vocational Skills
+  'cooking', 'culinary', 'baking', 'nutrition', 'dietetics',
+  'fitness', 'yoga', 'martial arts', 'self defense',
+  'public speaking', 'communication', 'leadership', 'negotiation',
+  'first aid', 'carpentry', 'welding', 'plumbing', 'electrician',
+  'agriculture', 'gardening', 'horticulture',
 ]);
 
 // Academic indicators that denote legitimate educational intent
@@ -62,7 +98,13 @@ const ACADEMIC_INDICATORS = new Set([
   'systems', 'design', 'theory', 'foundations', 'fundamentals', 'principles',
   'security', 'infrastructure', 'protocol', 'science', 'management', 'mathematics',
   'studies', 'computation', 'automation', 'modeling', 'intelligence', 'learning',
-  'synthesis', 'optimization', 'methodology'
+  'synthesis', 'optimization', 'methodology',
+  // Domain-neutral academic indicators
+  'brain', 'human', 'body', 'market', 'world', 'art', 'music', 'language',
+  'history', 'culture', 'clinical', 'research', 'professional', 'applied',
+  'advanced', 'introduction', 'basics', 'practical', 'anatomy', 'physiology',
+  'theory', 'practice', 'technique', 'method', 'skill', 'craft',
+  'composition', 'performance', 'production', 'writing', 'reading',
 ]);
 
 // Non-study activity, conversational mood, vulgarity & leisure blacklist
