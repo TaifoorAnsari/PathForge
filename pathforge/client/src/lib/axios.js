@@ -17,8 +17,8 @@ import axios from 'axios';
 import { useAuthStore } from '@/store/authStore';
 
 const api = axios.create({
-  baseURL: '/api/v1',
-  timeout: 15000,
+  baseURL: import.meta.env.VITE_API_URL || '/api/v1',
+  timeout: 30000,
   withCredentials: true, // Send httpOnly refresh token cookie
   headers: {
     'Content-Type': 'application/json',
