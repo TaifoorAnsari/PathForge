@@ -60,11 +60,19 @@ app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (mobile apps, curl, Postman)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`Origin ${origin} not allowed by CORS`));
+      if (!origin) return callback(null, true);
+
+      // Allow if explicitly listed in CORS_ALLOWED_ORIGINS
+      if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+        return callback(null, true);
       }
+
+      // Automatically allow any Vercel preview or production deployment
+      if (origin.endsWith('.vercel.app') || origin.includes('localhost')) {
+        return callback(null, true);
+      }
+
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
     },
     credentials: true, // Required for httpOnly cookie refresh tokens
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
