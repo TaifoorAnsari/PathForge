@@ -21,6 +21,9 @@ import {
   Flame,
   Award,
   ChevronRight,
+  Map,
+  Calendar,
+  Trophy,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useGamificationStore } from '@/store/gamificationStore';
@@ -435,6 +438,94 @@ export default function Layout() {
                         <p className="text-xs text-surface-muted truncate">
                           {user?.email || 'student@pathforge.dev'}
                         </p>
+                      </div>
+                    </div>
+
+                    {/* ─── Compact Mobile Stats Widget (Rank, Streak, Badges) ─── */}
+                    <div className="px-2 py-1 space-y-2 mb-2 pb-3 border-b border-primary-100 dark:border-surface-border">
+                      {/* Row 1: Dual Pill (Rank & Level | Daily Discipline Streak) */}
+                      <div className="grid grid-cols-2 gap-2">
+                        {/* Player Rank Pill */}
+                        <div className="p-2.5 rounded-xl bg-primary-50/70 dark:bg-surface-card border border-primary-200/80 dark:border-primary-900/60 flex flex-col justify-between">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-surface-muted">
+                              Rank
+                            </span>
+                            <span className="text-[10px] font-semibold text-primary-700 dark:text-primary-300">
+                              {currentLevel < 3 ? 'Novice' : currentLevel < 7 ? 'Practitioner' : 'Master'}
+                            </span>
+                          </div>
+                          <div className="flex items-baseline justify-between mt-1">
+                            <span className="text-sm font-heading font-bold text-surface-dark dark:text-white">
+                              Lvl {currentLevel}
+                            </span>
+                            <span className="text-[10px] font-medium text-surface-muted">
+                              {currentXp} XP
+                            </span>
+                          </div>
+                          {/* Mini Progress Bar */}
+                          <div className="w-full bg-primary-100 dark:bg-primary-950 rounded-full h-1 mt-1.5 overflow-hidden">
+                            <div
+                              className="bg-primary-600 h-1 rounded-full transition-all duration-300"
+                              style={{ width: `${Math.min(100, Math.max(0, levelProg.progressPercentage || 0))}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Daily Discipline Streak Pill */}
+                        <div className="p-2.5 rounded-xl bg-accent-amber/5 dark:bg-surface-card border border-accent-amber/20 dark:border-primary-900/60 flex flex-col justify-between">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-surface-muted">
+                              Discipline
+                            </span>
+                            <Flame size={12} className="text-accent-amber fill-accent-amber" />
+                          </div>
+                          <div className="flex items-baseline justify-between mt-1">
+                            <span className="text-sm font-heading font-bold text-surface-dark dark:text-white">
+                              {stats?.currentStreak ?? 0} {stats?.currentStreak === 1 ? 'day' : 'days'}
+                            </span>
+                            <span className="text-[10px] font-medium text-surface-muted">
+                              Best: {stats?.bestStreak ?? 0}d
+                            </span>
+                          </div>
+                          <div className="w-full bg-accent-amber/20 dark:bg-primary-950 rounded-full h-1 mt-1.5 overflow-hidden">
+                            <div
+                              className="bg-accent-amber h-1 rounded-full transition-all duration-300"
+                              style={{ width: `${Math.min(100, ((stats?.currentStreak ?? 0) / Math.max(1, stats?.bestStreak || 7)) * 100)}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Row 2: Achievements Strip */}
+                      <div className="p-2 rounded-xl bg-primary-50/50 dark:bg-surface-card border border-primary-200/60 dark:border-primary-900/40 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <Award size={13} className="text-primary-600 dark:text-primary-400 shrink-0" />
+                          <span className="text-xs font-semibold text-surface-dark dark:text-white truncate">
+                            {earnedBadges.length} {earnedBadges.length === 1 ? 'Badge' : 'Badges'} Unlocked
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1 shrink-0">
+                          {earnedBadges.slice(0, 3).map((badge) => (
+                            <div
+                              key={badge._id}
+                              className="w-5 h-5 rounded-md bg-white dark:bg-primary-900/70 border border-primary-200 dark:border-primary-800 flex items-center justify-center text-[10px]"
+                              title={badge.name}
+                            >
+                              <BadgeIcon iconName={badge.icon} size={11} />
+                            </div>
+                          ))}
+                          {earnedBadges.length > 3 && (
+                            <span className="text-[10px] font-bold text-primary-600 dark:text-primary-400 px-1">
+                              +{earnedBadges.length - 3}
+                            </span>
+                          )}
+                          {earnedBadges.length === 0 && (
+                            <span className="text-[10px] text-surface-muted italic">
+                              Earn on quizzes
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
 
