@@ -178,11 +178,11 @@ export default function RoadmapVisualizer({ roadmap }) {
           const isLast = index === nodes.length - 1;
 
           return (
-            <div key={node._id || index} className="relative flex items-start gap-6 pb-12 group">
+            <div key={node._id || index} className="relative flex items-start gap-3 sm:gap-6 pb-12 group">
               {/* Vertical Connecting Line */}
               {!isLast && (
                 <div
-                  className={`absolute top-14 left-6 w-0.5 -bottom-2 -ml-[1px] transition-colors duration-500 ${
+                  className={`absolute top-14 left-[22px] sm:left-6 w-0.5 -bottom-2 -ml-[1px] transition-colors duration-500 ${
                     isCompleted
                       ? 'bg-emerald-500'
                       : isInProgress
@@ -196,7 +196,7 @@ export default function RoadmapVisualizer({ roadmap }) {
               <button
                 type="button"
                 onClick={() => selectNode(node)}
-                className={`relative z-10 w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 shadow-soft focus:outline-none ${
+                className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 shadow-soft focus:outline-none ${
                   isCompleted
                     ? 'bg-emerald-500 text-white hover:scale-105 shadow-emerald-500/20'
                     : isInProgress
@@ -213,10 +213,9 @@ export default function RoadmapVisualizer({ roadmap }) {
                 )}
               </button>
 
-              {/* Milestone Card */}
               <div
                 onClick={() => selectNode(node)}
-                className={`flex-1 card p-5 sm:p-6 transition-all duration-300 cursor-pointer border ${
+                className={`flex-1 min-w-0 card p-4 sm:p-6 transition-all duration-300 cursor-pointer border ${
                   isSelected
                     ? 'ring-2 ring-primary-500 border-primary-500 shadow-card'
                     : isInProgress
@@ -226,39 +225,39 @@ export default function RoadmapVisualizer({ roadmap }) {
                     : 'border-primary-100 dark:border-primary-900/50 bg-white/50 dark:bg-primary-950/40 opacity-70 hover:opacity-100'
                 }`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-1.5 pb-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-xs font-bold uppercase tracking-wider text-surface-muted">
                       Milestone {node.order}
                     </span>
                     {isInProgress && (
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-primary-600 text-white shadow-xs">
-                        Current Milestone
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-primary-600 text-white shadow-xs whitespace-nowrap">
+                        Current
                       </span>
                     )}
                     {isCompleted && (
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 flex items-center gap-1 whitespace-nowrap">
                         <CheckCircle2 size={11} />
                         Completed
                       </span>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs text-surface-muted">
+                  <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-surface-muted flex-wrap">
                     <span className="inline-flex items-center gap-1">
-                      <Clock size={13} />
+                      <Clock size={12} />
                       {node.estimatedHours}h
                     </span>
                     <span>•</span>
                     <span className="inline-flex items-center gap-1">
-                      <BookOpen size={13} />
+                      <BookOpen size={12} />
                       {node.resources?.length || 0} Resources
                     </span>
                     {node.quizScore !== null && (
                       <>
                         <span>•</span>
                         <span className="inline-flex items-center gap-1 text-accent-gold font-bold">
-                          <Award size={13} />
+                          <Award size={12} />
                           {node.quizScore}%
                         </span>
                       </>
@@ -266,7 +265,7 @@ export default function RoadmapVisualizer({ roadmap }) {
                   </div>
                 </div>
 
-                <h3 className="text-lg font-heading font-bold text-surface-dark dark:text-white pt-1">
+                <h3 className="text-base sm:text-lg font-heading font-bold text-surface-dark dark:text-white pt-1">
                   {node.title}
                 </h3>
                 <p className="text-sm text-surface-muted mt-1 line-clamp-2 leading-relaxed">
@@ -274,12 +273,12 @@ export default function RoadmapVisualizer({ roadmap }) {
                 </p>
 
                 {/* Card Action Hint */}
-                <div className="mt-4 pt-3 border-t border-primary-100 dark:border-primary-900/60 flex items-center justify-between text-xs">
-                  <span className="text-primary-600 dark:text-primary-400 font-semibold group-hover:underline inline-flex items-center gap-1">
-                    {isCompleted ? 'Review resources & notes' : isLocked ? 'View milestone overview' : 'Explore milestone & take quiz'}
-                    <Sparkles size={12} />
+                <div className="mt-3 sm:mt-4 pt-3 border-t border-primary-100 dark:border-primary-900/60 flex items-center justify-between gap-2 text-[11px] sm:text-xs">
+                  <span className="text-primary-600 dark:text-primary-400 font-semibold group-hover:underline inline-flex items-center gap-1 truncate min-w-0">
+                    {isCompleted ? 'Review resources & notes' : isLocked ? 'View overview' : 'Explore & take quiz'}
+                    <Sparkles size={11} className="shrink-0" />
                   </span>
-                  <span className="text-surface-muted font-medium">Click to open</span>
+                  <span className="text-surface-muted font-medium whitespace-nowrap shrink-0">Click to open</span>
                 </div>
               </div>
             </div>
