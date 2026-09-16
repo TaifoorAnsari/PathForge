@@ -37,11 +37,7 @@ export default function Layout() {
   const location = useLocation();
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
-      return (
-        localStorage.getItem('pf_theme') === 'dark' ||
-        (!localStorage.getItem('pf_theme') &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      );
+      return localStorage.getItem('pf_theme') === 'dark';
     }
     return false;
   });
