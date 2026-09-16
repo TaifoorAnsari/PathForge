@@ -96,17 +96,13 @@ export const useAuthStore = create((set, get) => ({
       // No active refresh session or expired
     }
 
-    // Fallback: Check if user data exists in localStorage
+    // If refresh failed, clear any stale cached user so app stays in clean unauthenticated state
     try {
-      const stored = localStorage.getItem('pf_user');
-      if (stored) {
-        set({ user: JSON.parse(stored), isLoading: false });
-      } else {
-        set({ user: null, isAuthenticated: false, isLoading: false });
-      }
+      localStorage.removeItem('pf_user');
     } catch {
-      set({ user: null, isAuthenticated: false, isLoading: false });
+      // Ignore
     }
+    set({ user: null, accessToken: null, isAuthenticated: false, isLoading: false });
   },
 
   setLoading: (isLoading) => {

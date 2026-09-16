@@ -72,8 +72,8 @@ const getRefreshTokenCookieOptions = () => {
   const isProd = env.NODE_ENV === 'production';
   return {
     httpOnly: true, // Prevents client-side scripts from reading the cookie
-    secure: isProd, // Requires HTTPS in production
-    sameSite: isProd ? 'strict' : 'lax', // 'lax' in dev ensures cookie is sent on page reload and navigation
+    secure: isProd, // Requires HTTPS in production (mandatory when sameSite is 'none')
+    sameSite: isProd ? 'none' : 'lax', // 'none' enables cross-domain (Vercel <-> Render) cookie transmission in production
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
     path: '/', // Root path ensures refresh cookie is reliably transmitted on all auth requests
   };
