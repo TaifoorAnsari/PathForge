@@ -87,7 +87,3 @@ PathForge solves this by generating milestone-based roadmaps with clear checkpoi
 
 ---
 URL : https://pathforge-app-wine.vercel.app/
-
-👨‍💻 Author
-Taifoor Ansari
-GitHub: @TaifoorAnsari
