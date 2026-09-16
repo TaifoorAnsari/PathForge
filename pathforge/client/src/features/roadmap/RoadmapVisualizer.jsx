@@ -13,9 +13,11 @@
 
 import React from 'react';
 import { useRoadmapStore } from '@/store/roadmapStore';
+import { useAuthStore } from '@/store/authStore';
 import MilestoneDrawer from './MilestoneDrawer';
 import QuizModal from './QuizModal';
 import AddRoadmapModal from './AddRoadmapModal';
+import DownloadPDFButton from './DownloadPDFButton';
 import {
   CheckCircle2,
   Lock,
@@ -38,6 +40,7 @@ export default function RoadmapVisualizer({ roadmap }) {
     removeRoadmap,
     openAddRoadmapModal,
   } = useRoadmapStore();
+  const { user } = useAuthStore();
 
   if (!roadmap || !roadmap.nodes || roadmap.nodes.length === 0) {
     return null;
@@ -101,13 +104,16 @@ export default function RoadmapVisualizer({ roadmap }) {
           })}
         </div>
 
-        <button
-          onClick={openAddRoadmapModal}
-          className="btn-primary text-xs py-2 px-3.5 inline-flex items-center gap-1.5 self-start sm:self-auto shrink-0 shadow-soft"
-        >
-          <Plus size={14} />
-          Add Another Roadmap
-        </button>
+        <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+          <DownloadPDFButton roadmap={roadmap} userName={user?.name} />
+          <button
+            onClick={openAddRoadmapModal}
+            className="btn-primary text-xs py-2 px-3.5 inline-flex items-center gap-1.5 shadow-soft"
+          >
+            <Plus size={14} />
+            Add Another Roadmap
+          </button>
+        </div>
       </div>
 
       {/* ─── Header & Overall Progress Metrics ──────────────────────── */}
